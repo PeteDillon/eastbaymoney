@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Talk Money & Taxes — Pete Dillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F0E8;
+    --ink: #1A1A2E;
+    --accent: #E8472A;
+    --blue: #2B6CC4;
+    --muted: #6B6559;
+    --border: #D4CFC4;
+    --card: #FDFAF4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* Header */
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(42px, 8vw, 68px);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  /* Divider rule */
+  .rule {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.45s;
+  }
+
+  /* Body copy */
+  .intro {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  .intro p + p { margin-top: 16px; }
+
+  .intro strong {
+    font-weight: 500;
+  }
+
+  /* Form card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.7s;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+
+  .card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    outline: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232, 71, 42, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; }
+    .card { padding: 28px 20px; }
+  }
+
+  /* Tile grid */
+  .tile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 480px) {
+    .tile-grid { grid-template-columns: 1fr; }
+  }
+
+  .tile-group-label {
+    grid-column: 1 / -1;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-top: 10px;
+  }
+
+  .tile-group-label:first-child { margin-top: 0; }
+
+  .tile input[type="checkbox"] {
+    display: none;
+  }
+
+  .tile label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 13px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink);
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    user-select: none;
+    height: 100%;
+  }
+
+  .tile label:hover {
+    border-color: var(--accent);
+    background: #FDF5F2;
+  }
+
+  .tile input[type="checkbox"]:checked + label {
+    border-color: var(--accent);
+    background: #FDF5F2;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .tile-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+
+  .tile input[type="checkbox"]:checked + label .tile-check {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .tile input[type="checkbox"]:checked + label .tile-check::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  /* Emotional prompt */
+  .prompt-label {
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: block;
+  }
+
+  .prompt-hint {
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+    letter-spacing: 0.02em;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn:hover { background: #C43520; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  /* Thank you state */
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .thankyou .big-check {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .thankyou h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .thankyou p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Footer note */
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.85s;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+
+  /* Decorative corner element */
+  .corner-deco {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    opacity: 0.06;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<svg class="corner-deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="0" r="160" fill="none" stroke="#E8472A" stroke-width="1"/>
+  <circle cx="200" cy="0" r="120" fill="none" stroke="#E8472A" stroke-width="1"/>
+  <circle cx="200" cy="0" r="80" fill="none" stroke="#E8472A" stroke-width="1"/>
+</svg>
+
+<div class="page">
+  <div class="eyebrow">East Bay, CA · Spring 2026</div>
+  <h1>Let's Talk<br><em>Money & Taxes</em></h1>
+  <p class="subtitle">A curious conversation. No agenda.</p>
+  <div class="rule"></div>
+
+  <div class="intro">
+    <p>I'm Pete. I'm spending some time this spring listening and learning about how East Bay residents feel about money, taxes, and plans for the future.</p>
+    <p>No sales pitch. Just genuine curiosity and need finding — across generations, life stages, and financial situations.</p>
+    <p><strong>Leave your info below</strong> and I'll be in touch. Or just say hi if you have something on your mind.</p>
+  </div>
+
+  <div class="card" id="form-card">
+    <div class="card-title">Stay in touch</div>
+    <form id="contact-form">
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="phone">Phone <span style="font-weight:300;color:var(--muted);">optional</span></label>
+          <input type="tel" id="phone" placeholder="(510) 555-0100">
+        </div>
+        <div class="field">
+          <label for="address">City / Neighborhood <span style="font-weight:300;color:var(--muted);">optional</span></label>
+          <input type="text" id="address" placeholder="e.g., Rockridge, Fremont, Danville">
+        </div>
+      </div>
+
+      <div class="field">
+        <label style="margin-bottom:10px;">What's top of mind? <span style="font-weight:300;color:var(--muted);">Pick as many as apply.</span></label>
+        <div class="tile-grid">
+
+          <div class="tile-group-label">Personal Finance &amp; Tax Planning</div>
+          <div class="tile"><input type="checkbox" id="t1" value="getting-started"><label for="t1"><span class="tile-check"></span>Getting started — budgeting, saving, first investments</label></div>
+          <div class="tile"><input type="checkbox" id="t3" value="managing-debt"><label for="t3"><span class="tile-check"></span>Managing debt — credit cards, student loans, mortgages, etc.</label></div>
+          <div class="tile"><input type="checkbox" id="t2" value="income-tax"><label for="t2"><span class="tile-check"></span>Income taxes — filing, withholding, what I actually owe</label></div>
+          <div class="tile"><input type="checkbox" id="t4" value="housing"><label for="t4"><span class="tile-check"></span>Housing — rent vs. buy, down payment, property taxes</label></div>
+          <div class="tile"><input type="checkbox" id="t5" value="social-security"><label for="t5"><span class="tile-check"></span>Social Security &amp; Medicare planning</label></div>
+
+          <div class="tile-group-label">Wealth, Investment &amp; Tax Optimization</div>
+          <div class="tile"><input type="checkbox" id="t6" value="investment-gains"><label for="t6"><span class="tile-check"></span>Investments &amp; capital gains</label></div>
+          <div class="tile"><input type="checkbox" id="t7" value="estate-planning"><label for="t7"><span class="tile-check"></span>Estate planning, trusts &amp; wealth transfer</label></div>
+          <div class="tile"><input type="checkbox" id="t8" value="retirement"><label for="t8"><span class="tile-check"></span>Retirement income</label></div>
+          <div class="tile"><input type="checkbox" id="t9" value="tax-optimization"><label for="t9"><span class="tile-check"></span>Tax optimization</label></div>
+          <div class="tile"><input type="checkbox" id="t9b" value="charitable-giving"><label for="t9b"><span class="tile-check"></span>Charitable giving</label></div>
+
+          <div class="tile-group-label">Business Owners</div>
+          <div class="tile"><input type="checkbox" id="t10" value="entity-structure"><label for="t10"><span class="tile-check"></span>Business entity structure — LLC, S-Corp, Partnership</label></div>
+          <div class="tile"><input type="checkbox" id="t11" value="business-tax"><label for="t11"><span class="tile-check"></span>Business tax planning &amp; optimization</label></div>
+          <div class="tile"><input type="checkbox" id="t12" value="equity-comp"><label for="t12"><span class="tile-check"></span>Equity compensation &amp; ownership tax — QSBS, RSUs, options, etc.</label></div>
+          <div class="tile"><input type="checkbox" id="t13" value="exit-planning"><label for="t13"><span class="tile-check"></span>Succession planning &amp; exit strategy</label></div>
+
+          <div class="tile-group-label">Financial &amp; Operational Leadership</div>
+          <div class="tile"><input type="checkbox" id="t14" value="finance-leadership"><label for="t14"><span class="tile-check"></span>Fractional or full-time leadership — finance, accounting, or operations</label></div>
+          <div class="tile"><input type="checkbox" id="t15" value="ai-workflow"><label for="t15"><span class="tile-check"></span>Workflow modernization &amp; AI implementation</label></div>
+          <div class="tile"><input type="checkbox" id="t16" value="financing-transactions"><label for="t16"><span class="tile-check"></span>Financings &amp; transactions</label></div>
+
+          <div class="tile-group-label">Building Something</div>
+          <div class="tile"><input type="checkbox" id="t17" value="have-idea"><label for="t17"><span class="tile-check"></span>I have an idea</label></div>
+          <div class="tile"><input type="checkbox" id="t18" value="have-capital"><label for="t18"><span class="tile-check"></span>I have risk capital</label></div>
+          <div class="tile"><input type="checkbox" id="t19" value="have-skills"><label for="t19"><span class="tile-check"></span>I have skills, experience &amp; ambition</label></div>
+
+          <div class="tile-group-label">Civic &amp; Policy</div>
+          <div class="tile"><input type="checkbox" id="t20" value="genz-policy"><label for="t20"><span class="tile-check"></span>Gen Z &amp; Millennial economic interests</label></div>
+          <div class="tile"><input type="checkbox" id="t21" value="fiscal-policy"><label for="t21"><span class="tile-check"></span>Federal or state fiscal &amp; tax policy</label></div>
+          <div class="tile"><input type="checkbox" id="t22" value="nonprofit"><label for="t22"><span class="tile-check"></span>Nonprofit organizations</label></div>
+          <div class="tile"><input type="checkbox" id="t23" value="advocacy"><label for="t23"><span class="tile-check"></span>Advocacy organizations</label></div>
+
+        </div>
+      </div>
+
+      <div class="field" style="margin-top: 8px;">
+        <span class="prompt-label" style="font-style:normal;">Please share anything else, such as more about your interests and/or more detail on what's frustrated or worried you recently.</span>
+        <textarea id="note" placeholder="Your thoughts"></textarea>
+      </div>
+
+      <button type="submit" class="btn">Leave my info →</button>
+    </form>
+
+    <div class="thankyou" id="thankyou">
+      <div class="big-check">✦</div>
+      <h2>Thanks for stopping by!</h2>
+      <p>I look forward to being in touch.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Pete Dillon · <a href="mailto:peter.a.dillon@gmail.com">peter.a.dillon@gmail.com</a><br>
+    This is a personal curiosity project. Your info stays with me and won't be shared or sold.
+  </div>
+</div>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn  = e.target.querySelector('.btn');
+    const name    = document.getElementById('name').value;
+    const email   = document.getElementById('email').value;
+    const note    = document.getElementById('note').value;
+    const checked = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(c => c.value);
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('https://formspree.io/f/xdapogeq', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body:    JSON.stringify({
+          name:    name,
+          email:   email,
+          phone:   document.getElementById('phone').value || '—',
+          address: document.getElementById('address').value || '—',
+          topics:  checked.length ? checked.join(', ') : 'none selected',
+          note:    document.getElementById('note').value || '—'
+        })
+      });
+
+      if (response.ok) {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('thankyou').style.display = 'block';
+      } else {
+        btn.textContent = 'Leave my info →';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email peter.a.dillon@gmail.com');
+      }
+    } catch (err) {
+      btn.textContent = 'Leave my info →';
+      btn.disabled = false;
+      alert('No connection. Please try again or email peter.a.dillon@gmail.com');
+    }
+  });
+</script>
+</body>
+</html>
