@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Pete Dillon · East Bay Money</title>
+<meta name="description" content="Business finance and tax strategy, individual tax planning, and fractional finance leadership. Fee-only, independent, no products or commissions.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F0E8; --ink: #1A1A2E; --accent: #E8472A;
+    --blue: #2B6CC4; --muted: #6B6559; --border: #D4CFC4; --card: #FDFAF4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .corner-deco { position: fixed; top: 0; right: 0; width: 200px; height: 200px; pointer-events: none; opacity: 0.06; }
+
+  .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 64px; opacity: 0; animation: fadeUp 0.5s ease forwards 0.05s; }
+
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+
+  .nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
+  .nav-link { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link.active { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+
+  .nav-cta { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+  .nav-cta:hover { color: #C43520; border-color: #C43520; }
+
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
+
+  h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(36px, 6vw, 54px); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s; }
+  h1 em { font-style: italic; color: var(--blue); }
+
+  .rule { width: 48px; height: 2px; background: var(--accent); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s; }
+
+  .intro { font-size: 17px; line-height: 1.75; color: var(--ink); margin-bottom: 0; opacity: 0; animation: fadeUp 0.7s ease forwards 0.4s; }
+
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+
+  /* Service blocks */
+  .service-block { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .service-block:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .service-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--ink); }
+  .service-title em { font-style: italic; color: var(--blue); }
+
+  .service-desc { font-size: 16px; line-height: 1.72; color: var(--ink); margin-bottom: 16px; }
+
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; color: var(--muted);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 2px; padding: 4px 10px;
+  }
+
+  /* What I don't do */
+  .dont-block { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 32px; }
+
+  .dont-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .dont-item:first-child { padding-top: 0; }
+  .dont-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dont-title { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+
+  .dont-body { font-size: 15px; line-height: 1.7; color: var(--muted); }
+
+  /* CTA */
+  .bottom-cta { text-align: center; padding: 44px 32px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 48px; }
+  .bottom-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 30px); font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
+  .bottom-cta h2 em { font-style: italic; color: var(--blue); }
+  .bottom-cta p { font-size: 15px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; max-width: 380px; margin-left: auto; margin-right: auto; }
+
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: white; border: none; padding: 14px 32px; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: #C43520; transform: translateY(-1px); }
+
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 24px; }
+  .footer-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .footer-links a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+  .footer-links .divider { color: var(--border); }
+
+  .stagger { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .s1 { animation-delay: 0.5s; } .s2 { animation-delay: 0.6s; }
+  .s3 { animation-delay: 0.7s; } .s4 { animation-delay: 0.8s; } .s5 { animation-delay: 0.9s; }
+
+  @media (max-width: 520px) { nav { flex-wrap: wrap; gap: 12px; } .nav-links { gap: 14px; } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<svg class="corner-deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="0" r="160" fill="none" stroke="#E8472A" stroke-width="1"/>
+  <circle cx="200" cy="0" r="120" fill="none" stroke="#E8472A" stroke-width="1"/>
+  <circle cx="200" cy="0" r="80"  fill="none" stroke="#E8472A" stroke-width="1"/>
+</svg>
+
+<div class="page">
+
+  <nav>
+    <a class="nav-logo" href="/">East Bay Money</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="/services/">Services</a>
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-link" href="/faq/">FAQ</a>
+      <a class="nav-cta"  href="/talk/">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <div class="eyebrow">What I Do</div>
+  <h1>Independent guidance.<br><em>No products. No agenda.</em></h1>
+  <div class="rule"></div>
+  <p class="intro">I work on a fee-only basis — you pay for my time and advice, not for products I sell or assets I manage. That means my interests and yours are always aligned.</p>
+
+  <hr class="section-divider stagger s1">
+
+  <div class="stagger s1">
+    <div class="section-label">What I do</div>
+
+    <div class="service-block">
+      <div class="service-title">Business Finance <em>&amp; Tax Planning</em></div>
+      <div class="service-desc">The core of my practice. I work with business owners, founders, and executives to make sure the business structure and tax strategy actually work in their favor — not just on paper, but in the decisions they make every day. This includes entity selection, tax optimization, equity compensation planning, and thinking through major transactions before they happen.</div>
+      <div class="service-tags">
+        <span class="tag">Entity structure — LLC, S-Corp, Partnership</span>
+        <span class="tag">Business tax planning &amp; optimization</span>
+        <span class="tag">Equity comp — QSBS, RSUs, ISOs, NQSOs</span>
+        <span class="tag">Exit &amp; succession planning</span>
+        <span class="tag">Capital gains strategy</span>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-title">Fractional Finance <em>Leadership</em></div>
+      <div class="service-desc">For companies and nonprofits that need senior finance and operations thinking but aren't ready for a full-time hire. I can step in as a fractional CFO or finance director — running FP&amp;A, building financial models, supporting fundraising, or leading the accounting function — on a part-time or project basis.</div>
+      <div class="service-tags">
+        <span class="tag">Fractional CFO / Finance Director</span>
+        <span class="tag">FP&amp;A &amp; financial modeling</span>
+        <span class="tag">Fundraising support</span>
+        <span class="tag">AI workflow modernization</span>
+        <span class="tag">Financings &amp; transactions</span>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-title">Individual <em>&amp; Family Tax Planning</em></div>
+      <div class="service-desc">Income tax planning and strategy for individuals with complexity — self-employment income, equity compensation, investments, rental property, or multiple income streams. This is about understanding what you actually owe and finding legal ways to owe less, year after year.</div>
+      <div class="service-tags">
+        <span class="tag">Income tax strategy</span>
+        <span class="tag">Equity &amp; investment tax planning</span>
+        <span class="tag">Retirement account strategy</span>
+        <span class="tag">Estate &amp; wealth transfer planning</span>
+        <span class="tag">Charitable giving</span>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-title">Financial Planning <em>&amp; Decision Support</em></div>
+      <div class="service-desc">For people at a crossroads — a home purchase, a career change, a windfall, a retirement decision. Sometimes you just need someone with no stake in the outcome to think through the numbers with you and tell you what they actually see.</div>
+      <div class="service-tags">
+        <span class="tag">Housing — rent vs. buy, refinancing</span>
+        <span class="tag">Retirement &amp; Social Security timing</span>
+        <span class="tag">Debt management</span>
+        <span class="tag">Budgeting &amp; savings strategy</span>
+        <span class="tag">Second opinions</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider stagger s2">
+
+  <div class="stagger s3">
+    <div class="section-label">What I don't do</div>
+    <div class="dont-block">
+      <div class="dont-item">
+        <div class="dont-title">Manage your investments</div>
+        <div class="dont-body">I don't take custody of your assets, execute trades on your behalf, or charge a percentage of assets under management. I will advise you on your investment strategy, but the implementation stays in your hands. If you want a great investment manager, I'm happy to recommend one.</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-title">Sell financial products</div>
+        <div class="dont-body">No insurance policies, annuities, mutual funds, or any other financial product. I receive no commissions and have no financial relationship with any product provider. My only financial interest is in giving you good advice.</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-title">Prepare your tax returns</div>
+        <div class="dont-body">I focus on tax <em>planning</em> — the strategy that happens before the return, not the compliance work of filing it. I'll often work alongside your CPA or tax preparer. If you need a good one, I can point you in the right direction.</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-title">Give legal advice</div>
+        <div class="dont-body">I'm not an attorney. I can review documents, flag issues I see, and help you think through legal and structural decisions — but producing wills, trusts, operating agreements, or other legal documents is your attorney's job, not mine.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider stagger s4">
+
+  <div class="bottom-cta stagger s5">
+    <h2>Not sure if I can <em>help?</em></h2>
+    <p>Ask. The first conversation is free and comes with no obligation.</p>
+    <a class="btn-primary" href="/talk/">Let's Talk →</a>
+  </div>
+
+  <div class="footer-note stagger s5">
+    <div class="footer-links">
+      <span>Pete Dillon</span>
+      <span class="divider">·</span>
+      <a href="mailto:peter.a.dillon@gmail.com">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        peter.a.dillon@gmail.com
+      </a>
+      <span class="divider">·</span>
+      <a href="https://www.linkedin.com/in/peteradillon/" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    East Bay Money is a personal practice. Your information stays with me and won't be shared or sold.
+  </div>
+
+</div>
+</body>
+</html>

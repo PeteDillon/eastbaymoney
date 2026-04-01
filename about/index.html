@@ -4,217 +4,115 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Pete Dillon · East Bay Money</title>
-<meta name="description" content="Pete Dillon is a financial and tax professional based in the East Bay. His path from atmospheric chemistry to finance reflects a lifelong drive to understand how things work.">
+<meta name="description" content="Pete Dillon is a financial and tax professional based in the East Bay. His path from atmospheric chemistry to finance reflects a lifelong drive to understand how systems work.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F5F0E8;
-    --ink: #1A1A2E;
-    --accent: #E8472A;
-    --blue: #2B6CC4;
-    --muted: #6B6559;
-    --border: #D4CFC4;
-    --card: #FDFAF4;
+    --bg: #F5F0E8; --ink: #1A1A2E; --accent: #E8472A;
+    --blue: #2B6CC4; --muted: #6B6559; --border: #D4CFC4; --card: #FDFAF4;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--ink);
+    font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden;
   }
 
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
 
   .corner-deco {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    pointer-events: none;
-    opacity: 0.06;
+    position: fixed; top: 0; right: 0;
+    width: 200px; height: 200px; pointer-events: none; opacity: 0.06;
   }
 
   .page {
-    position: relative;
-    z-index: 1;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto; padding: 48px 24px 80px;
   }
 
-  /* Nav */
   nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 72px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 0.05s;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 64px; opacity: 0; animation: fadeUp 0.5s ease forwards 0.05s;
   }
 
   .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
+  .nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
 
   .nav-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
   }
 
   .nav-link:hover { color: var(--ink); }
   .nav-link.active { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
 
   .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 1px;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 1px;
     transition: color 0.2s, border-color 0.2s;
   }
 
   .nav-cta:hover { color: #C43520; border-color: #C43520; }
 
-  /* Hero */
   .eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.1s;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
   }
 
   h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(38px, 7vw, 58px);
-    line-height: 1.08;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.2s;
+    font-size: clamp(36px, 6vw, 54px); line-height: 1.1; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s;
   }
 
   h1 em { font-style: italic; color: var(--blue); }
 
   .rule {
-    width: 48px;
-    height: 2px;
-    background: var(--accent);
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.3s;
+    width: 48px; height: 2px; background: var(--accent); margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
   }
 
-  /* Pull quote */
   .pull-quote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: clamp(18px, 3.5vw, 23px);
-    line-height: 1.5;
-    color: var(--ink);
-    border-left: 3px solid var(--accent);
-    padding-left: 24px;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: clamp(18px, 3vw, 22px); line-height: 1.5; color: var(--ink);
+    border-left: 3px solid var(--accent); padding-left: 24px; margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
   }
 
-  /* Body prose */
-  .prose {
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.45s;
-  }
+  .prose { opacity: 0; animation: fadeUp 0.7s ease forwards 0.45s; }
 
   .prose p {
-    font-size: 17px;
-    line-height: 1.78;
-    color: var(--ink);
-    margin-bottom: 22px;
+    font-size: 17px; line-height: 1.78; color: var(--ink); margin-bottom: 22px;
   }
 
   .prose p:last-child { margin-bottom: 0; }
+  .prose em { font-style: italic; }
 
-  /* Inline pull — a highlighted sentence mid-prose */
-  .inline-pull {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--blue);
-    margin: 32px 0;
-    padding-left: 24px;
-    border-left: 2px solid var(--blue);
-  }
-
-  /* Section label */
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
   .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 28px;
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px;
   }
 
-  .section-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 56px 0;
-  }
-
-  /* Credential strip */
   .credentials {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 32px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; padding: 28px 32px;
   }
 
-  .cred-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 32px;
-  }
+  .cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; }
 
   @media (max-width: 520px) {
     .cred-grid { grid-template-columns: 1fr; }
@@ -222,150 +120,66 @@
   }
 
   .cred-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
   }
 
-  .cred-value {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink);
-  }
+  .cred-value { font-size: 14px; line-height: 1.6; color: var(--ink); }
 
-  /* What to Expect */
-  .expect-item {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 20px;
-    align-items: start;
-    padding: 26px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .expect-item:first-child { border-top: 1px solid var(--border); }
-
-  .expect-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    padding-top: 4px;
-    letter-spacing: 0.05em;
-  }
-
-  .expect-content h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--ink);
-  }
-
-  .expect-content h3 em { font-style: italic; color: var(--blue); }
-
-  .expect-content p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--muted);
-  }
-
-  /* Bottom CTA */
   .bottom-cta {
-    text-align: center;
-    padding: 48px 32px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 48px;
+    text-align: center; padding: 44px 32px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; margin-bottom: 48px;
   }
 
   .bottom-cta h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    font-size: clamp(22px, 4vw, 30px); font-weight: 700;
+    line-height: 1.2; margin-bottom: 14px;
   }
 
   .bottom-cta h2 em { font-style: italic; color: var(--blue); }
 
   .bottom-cta p {
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 28px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 15px; color: var(--muted); line-height: 1.65;
+    margin-bottom: 24px; max-width: 380px; margin-left: auto; margin-right: auto;
   }
 
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 14px 32px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border-radius: 3px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: white; border: none; padding: 14px 32px;
+    font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
   }
 
   .btn-primary:hover { background: #C43520; transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
 
-  /* Footer */
   .footer-note {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.7;
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--muted); line-height: 1.7;
+    border-top: 1px solid var(--border); padding-top: 24px;
   }
 
   .footer-links {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;
   }
 
   .footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.2s;
+    color: var(--muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
   }
 
   .footer-links a:hover { color: var(--blue); }
   .footer-links .divider { color: var(--border); }
 
-  /* Stagger */
   .stagger { opacity: 0; animation: fadeUp 0.7s ease forwards; }
-  .s1 { animation-delay: 0.55s; }
-  .s2 { animation-delay: 0.65s; }
-  .s3 { animation-delay: 0.75s; }
-  .s4 { animation-delay: 0.85s; }
-  .s5 { animation-delay: 0.95s; }
+  .s1 { animation-delay: 0.5s; } .s2 { animation-delay: 0.6s; }
+  .s3 { animation-delay: 0.7s; } .s4 { animation-delay: 0.8s; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -374,7 +188,7 @@
 <svg class="corner-deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <circle cx="200" cy="0" r="160" fill="none" stroke="#E8472A" stroke-width="1"/>
   <circle cx="200" cy="0" r="120" fill="none" stroke="#E8472A" stroke-width="1"/>
-  <circle cx="200" cy="0" r="80" fill="none" stroke="#E8472A" stroke-width="1"/>
+  <circle cx="200" cy="0" r="80"  fill="none" stroke="#E8472A" stroke-width="1"/>
 </svg>
 
 <div class="page">
@@ -382,8 +196,10 @@
   <nav>
     <a class="nav-logo" href="/">East Bay Money</a>
     <div class="nav-links">
+      <a class="nav-link" href="/services/">Services</a>
       <a class="nav-link active" href="/about/">About</a>
-      <a class="nav-cta" href="/talk/">Let's Talk →</a>
+      <a class="nav-link" href="/faq/">FAQ</a>
+      <a class="nav-cta"  href="/talk/">Let's Talk →</a>
     </div>
   </nav>
 
@@ -392,25 +208,15 @@
   <div class="rule"></div>
 
   <div class="pull-quote">
-    "While physics and chemistry explain much of the physical world, economics, finance and financial accounting explain much of the human world."
+    "Physics and chemistry explain much of the physical world. Economics, finance, and accounting explain much of the human world. I've spent my career learning both."
   </div>
 
   <div class="prose">
-    <p>I grew up in Oregon and gravitated toward science early — graduating with a degree in chemistry from Macalester College in Minnesota, then spending a year as a chemist at 3M before coming to California to earn a graduate degree in atmospheric chemistry from UC Berkeley. Chemistry, as I saw it then, was a beautiful thing: rigorous, internally consistent, and highly explanatory. A set of tools for understanding why the world works the way it does.</p>
+    <p>I grew up drawn to systems — the kind of rigorous, internally consistent frameworks that actually explain why things work the way they do. That impulse took me first into chemistry: a degree at Macalester, a graduate degree in atmospheric chemistry at UC Berkeley, a year at 3M. Precise, explanatory, deeply satisfying.</p>
 
-    <p>But during graduate school, connections with Haas business school students through the Berkeley Energy and Resources Collaborative started to expand what I thought my interests could be. I went into environmental consulting at ERM — air-quality permitting, compliance for oil and gas clients, mining, aluminum smelting — and eventually found myself embedded at Chevron's headquarters in San Ramon, where I owned quarterly internal reporting of energy-intensity index metrics that rolled up to exec- and board-level reporting. My client sat within corporate accounting. I admired the rigor and operational discipline I saw there.</p>
+    <p>Finance pulled me in through a side door. Working at Chevron in environmental consulting, I found myself embedded in their corporate accounting function, reporting energy metrics to the board. I admired the discipline. I read <em>Titan</em> — Ron Chernow's biography of Rockefeller, who trained as an accountant — and saw the same rigor I loved in science applied to human organizations. I went back to Berkeley for an MBA at Haas and a certificate in accounting through Berkeley Extension, with a mentor, Richard Long, a seasoned Silicon Valley CFO, who showed me how powerful the role of finance can be in building great organizations.</p>
 
-    <div class="inline-pull">
-      "I began to see that while physics and chemistry explain much of the physical world, economics, finance and financial accounting explain much of the human world."
-    </div>
-
-    <p>Around the same time, I read <em>Titan</em> — Ron Chernow's biography of John D. Rockefeller, who had trained as an accountant. It was the first time I'd ever seriously considered accounting as a discipline. The story that stuck with me: Rockefeller noticed a technician using 40 drops of solder to seal each oil can. He tried 38 — too many leaks. At 39, the cans held. He had lowered costs by 2.5 percent by looking closely at something everyone else had stopped seeing. That kind of thinking appealed to me.</p>
-
-    <p>I went back to Berkeley — this time for an MBA at Haas, focusing on finance and strategy — and then pursued the UC Berkeley Extension Certificate in Accounting to close the gaps. A mentor, Richard Long, a seasoned Silicon Valley CFO and former accountant, opened my eyes to the crucial and powerful role that accounting plays in building and operating great organizations.</p>
-
-    <p>What followed was a career at the intersection of finance, tax, and operations: FP&amp;A at Color Health, finance director at KETOS, strategic finance at Luminary Cloud, and currently senior finance manager at the Bill &amp; Melinda Gates Foundation, where I lead FP&amp;A partnership to the Immunization team within the Global Development division. Through all of it, the through-line has been the same impulse that drew me to chemistry: a deep desire to understand how things work — and to use that understanding to help people and organizations do better.</p>
-
-    <p>I'm working toward my CPA license and spending this spring in the East Bay doing something a little different — getting out into the community, listening, and learning. If something's on your mind, I'd genuinely love to hear it.</p>
+    <p>What followed was a career at the intersection of finance, tax, and operations — from early-stage tech companies to the Bill &amp; Melinda Gates Foundation, where I currently lead FP&amp;A partnership to the Immunization team in the Global Development division. I'm working toward my CPA license. And I'm spending this spring in the East Bay doing what I've always done: trying to understand how things work — and helping people use that understanding to make better decisions.</p>
   </div>
 
   <hr class="section-divider stagger s1">
@@ -419,21 +225,21 @@
     <div class="section-label">Background</div>
     <div class="credentials">
       <div class="cred-grid">
-        <div class="cred-item">
+        <div>
           <div class="cred-label">Education</div>
           <div class="cred-value">B.A. Chemistry, Macalester College<br>M.S. Atmospheric Chemistry, UC Berkeley<br>MBA, UC Berkeley Haas School of Business<br>Certificate in Accounting, UC Berkeley Extension</div>
         </div>
-        <div class="cred-item">
-          <div class="cred-label">Career highlights</div>
-          <div class="cred-value">ERM · Aperia Technologies · Color Health · KETOS · Luminary Cloud · Bill &amp; Melinda Gates Foundation</div>
+        <div>
+          <div class="cred-label">Career</div>
+          <div class="cred-value">3M · ERM · Aperia Technologies · Color Health · KETOS · Luminary Cloud · Bill &amp; Melinda Gates Foundation</div>
         </div>
-        <div class="cred-item">
-          <div class="cred-label">Areas of focus</div>
-          <div class="cred-value">Tax planning · Financial strategy · FP&amp;A · Business operations · Fractional finance leadership</div>
+        <div>
+          <div class="cred-label">Focus areas</div>
+          <div class="cred-value">Business tax &amp; finance · FP&amp;A · Equity compensation · Fractional CFO leadership · Individual tax planning</div>
         </div>
-        <div class="cred-item">
-          <div class="cred-label">Approach</div>
-          <div class="cred-value">Fee-only · Independent · No products, no commissions · CPA exam in progress</div>
+        <div>
+          <div class="cred-label">Credentials</div>
+          <div class="cred-value">CPA exam in progress · Fee-only · Independent · No products or commissions</div>
         </div>
       </div>
     </div>
@@ -441,48 +247,13 @@
 
   <hr class="section-divider stagger s3">
 
-  <div class="stagger s3">
-    <div class="section-label">What to expect</div>
-
-    <div class="expect-item">
-      <div class="expect-num">01</div>
-      <div class="expect-content">
-        <h3>A real <em>conversation</em></h3>
-        <p>The first thing I'll do is listen. Tell me what's on your mind — a question, a worry, a decision you're trying to make, or just a vague feeling that something needs attention. There's no agenda and nothing to sign. We're just talking.</p>
-      </div>
-    </div>
-    <div class="expect-item">
-      <div class="expect-num">02</div>
-      <div class="expect-content">
-        <h3>An honest <em>picture</em></h3>
-        <p>I'll help you understand where you actually stand — with your taxes, your finances, your business, or whatever brought you to the table. Not a pitch for a product or a fund. Just an evidence-based read of your situation and what the options look like.</p>
-      </div>
-    </div>
-    <div class="expect-item">
-      <div class="expect-num">03</div>
-      <div class="expect-content">
-        <h3>A path <em>forward</em></h3>
-        <p>If there's a clear next step — something to do, change, or think about differently — I'll tell you. And if the best thing I can do is refer you to someone better suited to your specific situation, I'll do that too. The goal is your clarity, not my engagement.</p>
-      </div>
-    </div>
-    <div class="expect-item">
-      <div class="expect-num">04</div>
-      <div class="expect-content">
-        <h3>No <em>surprises</em> on cost</h3>
-        <p>I work on a fee-only basis — no commissions, no products, no conflicts of interest. An initial conversation costs nothing. If we decide to work together on something more involved, we'll agree on terms before anything starts.</p>
-      </div>
-    </div>
-  </div>
-
-  <hr class="section-divider stagger s4">
-
-  <div class="bottom-cta stagger s5">
+  <div class="bottom-cta stagger s4">
     <h2>Ready to <em>talk?</em></h2>
-    <p>Leave your info and a few words about what's on your mind. I'll be in touch.</p>
-    <a class="btn-primary" href="/talk/">Start a conversation →</a>
+    <p>The first conversation is free and comes with no obligations.</p>
+    <a class="btn-primary" href="/talk/">Let's Talk →</a>
   </div>
 
-  <div class="footer-note stagger s5">
+  <div class="footer-note stagger s4">
     <div class="footer-links">
       <span>Pete Dillon</span>
       <span class="divider">·</span>
@@ -492,7 +263,7 @@
       </a>
       <span class="divider">·</span>
       <a href="https://www.linkedin.com/in/peteradillon/" target="_blank" rel="noopener noreferrer">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
     </div>
