@@ -1,1 +1,4 @@
 .DS_Store
+
+# Physical signage assets (not part of deployed site)
+assets/sign/
